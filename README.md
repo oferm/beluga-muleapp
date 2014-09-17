@@ -1,0 +1,1 @@
+This is the beluga muleapp, which is used by the Beluga webapp to communicate with each Mule instance.

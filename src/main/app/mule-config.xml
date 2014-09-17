@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mule xmlns="http://www.mulesoft.org/schema/mule/core"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xmlns:management="http://www.mulesoft.org/schema/mule/management"
+      xmlns:http="http://www.mulesoft.org/schema/mule/http"
+      xmlns:jersey="http://www.mulesoft.org/schema/mule/jersey"
+      xsi:schemaLocation="
+        http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/3.3/mule.xsd
+        http://www.mulesoft.org/schema/mule/management http://www.mulesoft.org/schema/mule/management/3.3/mule-management.xsd
+        http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/3.3/mule-http.xsd
+        http://www.mulesoft.org/schema/mule/jersey http://www.mulesoft.org/schema/mule/jersey/3.3/mule-jersey.xsd
+ ">
+
+    <management:jmx-default-config port="1098" registerMx4jAdapter="true">
+        <management:credentials>
+            <!--<spring:entry key="esbMonitor" value="esbMonitor" />-->
+        </management:credentials>
+    </management:jmx-default-config>
+
+    <flow name="fileUpload">
+        <http:inbound-endpoint exchange-pattern="request-response" host="localhost" port="8082" method="POST" />
+        <jersey:resources>
+            <component class="com.cybercom.beluga.FileUploadService"/>
+        </jersey:resources>
+    </flow>
+</mule>
